@@ -34,7 +34,7 @@ export default function Home() {
         </div>
       </div>
       <div id="code">
-        <h2>Flexbox demo</h2>
+        <h2>Flexbox Demo with NextJS CSS Modules</h2>
         <div>
           <h3>Import the CSS Module</h3>
           <code>
