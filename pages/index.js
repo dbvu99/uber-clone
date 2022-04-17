@@ -2,6 +2,7 @@ import tw from "tailwind-styled-components/dist/tailwind";
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
 import { useEffect } from "react";
 
+// get token by creating an account
 mapboxgl.accessToken = "pk.eyJ1IjoiZGJ2dTUzMSIsImEiOiJjbDIyaTEzdzkwZDQxM2ptYm4wOHpjY2lzIn0.eDnLit0F4TTbXxkHqn1Iew";
 
 export default function Home() {
