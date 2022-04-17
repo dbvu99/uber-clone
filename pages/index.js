@@ -9,7 +9,6 @@ export default function Home() {
     <Wrapper>
       <Map></Map>
       <ActionItems></ActionItems>
-      123
     </Wrapper>
   );
 }
