@@ -6,9 +6,10 @@ import ActionItems from "../partials/ActionItems";
 
 export default function Home() {
   return (
-   <>
-   dshfkdsf
-   </>
+    <Wrapper>
+      <Map></Map>
+      <ActionItems></ActionItems>
+    </Wrapper>
   );
 }
 
