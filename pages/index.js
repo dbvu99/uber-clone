@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Home() {
 	return (
 		<Wrapper>
-			<Map></Map>
+			<Map/>
 			<ActionItems>
 				<Header>
 					<UberLogo src="https://th.bing.com/th/id/OIP.yWamn7vr-vdRyiMyybGyDwHaCl?pid=ImgDet&rs=1" />
@@ -19,16 +19,16 @@ export default function Home() {
 				<ActionButtons>
 					<Link href="./search" passHref>
 						<ActionButton>
-							<ActionButtonImage src="https://th.bing.com/th/id/R.7fe6a3d0b64ab825d92700ccbe1a9e18?rik=y6QlzFxZSmTFBQ&pid=ImgRaw&r=0" />
+							<ActionButtonImage src="./car.png" />
 							Ride
 						</ActionButton>
 					</Link>
 					<ActionButton>
-						<ActionButtonImage src="https://th.bing.com/th/id/R.eab5b750b2078bd5bb25de3dcee1b778?rik=o%2bAwYe9WNGc2Iw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fbicycle%2fbicycle_PNG5376.png&ehk=WZRAgR0IYSJN0fI998HQYps6mQk3W6KGyAwGU3YaGi8%3d&risl=&pid=ImgRaw&r=0" />
+						<ActionButtonImage src="./car1.png" />
 						wheels
 					</ActionButton>
 					<ActionButton>
-						<ActionButtonImage src="https://webstockreview.net/images/calendar-icon-png-transparent-12.png" />
+						<ActionButtonImage src="./calendar.png" />
 						Reserve
 					</ActionButton>
 				</ActionButtons>

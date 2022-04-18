@@ -1,10 +1,15 @@
-import React from "react";import tw from "tailwind-styled-components";
+import React, { useState } from "react";import tw from "tailwind-styled-components";
+import Link from "next/link";
 const Search = () => {
+	const [pickup, setPickup] = useState("");
+	const [dropoff, setDropoff] = useState("");
 	return (
 		<Wrapper>
-			<ButtonContainer>
-				<BackButton src="https://clipground.com/images/android-back-button-icon-clipart.png" />
-			</ButtonContainer>
+			<Link href="./" passHref>
+				<ButtonContainer>
+					<BackButton src="./arrow-left.png" />
+				</ButtonContainer>
+			</Link>
 			<InputContainer>
 				<FromToIcons>
 					<Circle src="" />
@@ -12,8 +17,16 @@ const Search = () => {
 					<Square src="" />
 				</FromToIcons>
 				<InputBoxes>
-					<Input placeholder="Enter pickup location" />
-					<Input placeholder="Where to?" />
+					<Input
+						placeholder="Enter pickup location"
+						value={pickup}
+						onChange={(e) => setPickup(e.target.value)}
+					/>
+					<Input
+						placeholder="Where to?"
+						value={dropoff}
+						onChange={(e) => setDropoff(e.target.value)}
+					/>
 				</InputBoxes>
 				<PlusIcon>
 					<Div1 />
@@ -21,10 +34,23 @@ const Search = () => {
 				</PlusIcon>
 			</InputContainer>
 			<SavedPlaces>
-				<StarIcon src="https://cdn.onlinewebfonts.com/svg/img_359362.png" />
+				<StarIcon src="./star.png" />
 				Saved Places
 			</SavedPlaces>
-            
+			<Link
+				href={{
+					pathname: "/confirm",
+					query: {
+						pickup: pickup,
+						dropoff: dropoff,
+					},
+				}}
+				passHref
+			>
+				<ConfirmButtonContainer>
+					Confirm Locations
+				</ConfirmButtonContainer>
+			</Link>
 		</Wrapper>
 	);
 };
@@ -32,7 +58,7 @@ const Search = () => {
 export default Search;
 const Wrapper = tw.div` bg-gray-200 h-screen `;
 const ButtonContainer = tw.div` bg-white px-4 py-2 `;
-const BackButton = tw.img`h-6`;
+const BackButton = tw.img`h-6 cursor-pointer`;
 const InputContainer = tw.div` bg-white px-2 py-2 flex items-center px-4`;
 const FromToIcons = tw.div`w-6 mr-2 flex flex-col justify-center items-center`;
 const Circle = tw.div`w-2.5 h-2.5 bg-gray-400 rounded-full `;
@@ -45,3 +71,4 @@ const Div1 = tw.div` h-1 bg-black absolute inset-x-1 top-5`;
 const Div2 = tw.div`w-1 bg-black  absolute inset-y-1 left-5`;
 const SavedPlaces = tw.div`flex items-center bg-white px-4 py-2 mt-1`;
 const StarIcon = tw.img` w-10 p-2 rounded-full mr-2`;
+const ConfirmButtonContainer = tw.div` bg-black text-white text-center mt-2 mx-4 px-3 py-3 text-2xl cursor-pointer`;
