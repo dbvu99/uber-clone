@@ -1,19 +1,37 @@
-import tw from "tailwind-styled-components/dist/tailwind";import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
-import { useEffect } from "react";
+import tw from "tailwind-styled-components/dist/tailwind";
+import React, { useEffect, useState } from "react";
 import Map from "../partials/Map";
 import ActionItems from "../partials/ActionItems";
 import Link from "next/link";
-
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
+import { auth, provider } from "../firebase";
 export default function Home() {
+	const [u, setU] = useState(null);
+	const router = useRouter();
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user) {
+				setU({
+					name: user.displayName,
+					photoUrl: user.photoURL,
+				});
+			} else {
+				setU(null);
+				router.push("./login");
+			}
+		});
+	}, []);
+
 	return (
 		<Wrapper>
-			<Map/>
+			<Map />
 			<ActionItems>
 				<Header>
-					<UberLogo src="https://th.bing.com/th/id/OIP.yWamn7vr-vdRyiMyybGyDwHaCl?pid=ImgDet&rs=1" />
+					<UberLogo src="./logo.png" />
 					<Profile>
-						<Name> Tom </Name>
-						<UberImage src="https://phunugioi.com/wp-content/uploads/2020/04/anh-gai-xinh-2000-de-thuong.jpg" />
+						<Name> {u && u.name} </Name>
+						<UberImage src={u && u.photoUrl} onClick={()=>signOut(auth)} />
 					</Profile>
 				</Header>
 				<ActionButtons>
@@ -43,7 +61,7 @@ const Header = tw.div`flex justify-between items-center`;
 const UberLogo = tw.img` h-14`;
 const Profile = tw.div`flex items-center`;
 const Name = tw.div`mr-4 text-sm`;
-const UberImage = tw.img`h-12 w-12 rounded-full border border-gray-200 p-px`;
+const UberImage = tw.img`h-12 w-12 rounded-full border border-gray-200 p-px cursor-pointer`;
 const ActionButtons = tw.div`flex mt-4 `;
 const ActionButton = tw.div`bg-gray-200 flex-1 m-1 h-32 flex items-center flex-col justify-center rounded-lg transform hover:scale-105 transition`;
 const ActionButtonImage = tw.img`h-3/5`;
