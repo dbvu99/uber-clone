@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";import tw from "tailwind-styled-components";
+import React, { useEffect, useState } from "react";
+import tw from "tailwind-styled-components";
 import Map from "../partials/Map";
 import { useRouter } from "next/router";
+import RideSelector from "../partials/RideSelector";
+
 const Confirm = () => {
 	const router = useRouter();
-    const { pickup, dropoff } = router.query;
+	const { pickup, dropoff } = router.query;
 	const [pickupCoordinates, setPickupCoordinates] = useState();
 	const [dropoffCoordinates, setDropoffCoordinates] = useState();
 
@@ -35,6 +38,7 @@ const Confirm = () => {
 		getPickupCoordinates(pickup);
 		getDropoffCoordinates(dropoff);
 	}, [pickup, dropoff]);
+
 	return (
 		<Wrapper>
 			<Map
@@ -42,9 +46,10 @@ const Confirm = () => {
 				dropoffCoordinates={dropoffCoordinates}
 			/>
 			<RideContainer>
-				Ride selector Confirm Button
-				{pickupCoordinates}
-				{dropoffCoordinates}
+				<RideSelector />
+				<ConfirmButtonContainer>
+					<ConfirmButton>Confirm UberX</ConfirmButton>
+				</ConfirmButtonContainer>
 			</RideContainer>
 		</Wrapper>
 	);
@@ -52,4 +57,6 @@ const Confirm = () => {
 
 export default Confirm;
 const Wrapper = tw.div`flex flex-col h-screen`;
-const RideContainer = tw.div`flex-1`;
+const RideContainer = tw.div`flex-1 flex flex-col h-1/2`;
+const ConfirmButtonContainer = tw.div` `;
+const ConfirmButton =tw.div`bg-black text-white my-4 mx-4 py-4 text-center text-xl`

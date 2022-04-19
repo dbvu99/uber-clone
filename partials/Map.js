@@ -46,5 +46,5 @@ export default function Map(props) {
 }
 
 const Wrapper = tw.div`
-  grow shrink bg-red-300
+ flex-1 h-1/2
 `;
