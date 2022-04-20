@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import Header from "./tesla/Header";
 const Section = ({ title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   return (
     <Wrappper bgImage={image}>
+      <Header></Header>
       <ItemText>
         <Header1>{title}</Header1>
         {description && <Normal>{description}</Normal>}
