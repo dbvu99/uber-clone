@@ -1,15 +1,15 @@
 import styled from "styled-components";
-const Section = () => {
+const Section = ({ title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   return (
-    <Wrappper>
+    <Wrappper bgImage={image}>
       <ItemText>
-        <Header1>Model X</Header1>
-        <Normal>Order Online for Touchless Delivery</Normal>
+        <Header1>{title}</Header1>
+        {description && <Normal>{description}</Normal>}
       </ItemText>
       <Buttons>
         <ButtonGroup>
-          <LeftButton>Test</LeftButton>
-          <RightButton>Test</RightButton>
+          <LeftButton>{leftButton}</LeftButton>
+          {rightButton && <RightButton>{rightButton}</RightButton>}
         </ButtonGroup>
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
@@ -23,7 +23,7 @@ const Wrappper = styled.div`
   background: blue;
   height: 100vh;
   width: 100%;
-  background-image: url("/tesla/images/model-x.jpg");
+  background-image: ${({ bgImage }) => `url(/tesla/images/${bgImage})`};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -31,6 +31,7 @@ const Wrappper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 `;
 
 const ItemText = styled.div`
@@ -60,6 +61,7 @@ const LeftButton = styled.div`
   opacity: 0.85;
   text-transform: uppercase;
   margin: 8px;
+  font-size: 14px;
 `;
 
 const RightButton = styled(LeftButton)`
@@ -72,6 +74,9 @@ const ButtonGroup = styled.div`
   display: flex;
   margin-bottom: 30px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const DownArrow = styled.img`

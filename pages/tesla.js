@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import Section from "../partials/Section";
+import carInfo from "../props/tesla/carInfo.json";
 
 export default function Tesla() {
   return (
     <Container>
-      <Section></Section>
+      {carInfo.map((info) => (
+        <Section {...info} key={info.id}></Section>
+      ))}
     </Container>
   );
 }
 
 const Container = styled.div`
   height: 100vh;
-  overflow: hidden;
   background: red;
 `;
