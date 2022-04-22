@@ -15,7 +15,10 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
           }
         });
       },
-      { threshold: 0.25 }
+      {
+        threshold: 0.25,
+        rootMargin: "50px", //cancel animation when distance is 50px away from the viewport
+      }
     );
 
     observer.observe(header1);
