@@ -3,21 +3,33 @@ import { Fade } from "react-reveal";
 import styled from "styled-components";
 const Section = ({ id, title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   const elementId = "header-" + id;
+  // console.log(id);
+
   useEffect(() => {
     const header1 = document.getElementById(elementId);
+    // const header1 = document.getElementById(elementId);
+    // const header1 = document.getElementById(elementId);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          // this is not an ideal solution for sliding up and down because it causes element to enter view port, but it's good to know
+          // if (entry.isIntersecting) {
+          //   header1.classList.add("slideUp-animate");
+          // } else {
+          //   header1.classList.remove("slideUp-animate");
+          // }
+          console.log(id, entry.intersectionRatio);
+          if (entry.intersectionRatio === 1) {
             header1.classList.add("slideUp-animate");
-          } else {
+          }
+          if (entry.intersectionRatio === 0) {
             header1.classList.remove("slideUp-animate");
           }
         });
       },
       {
-        threshold: 0.25,
-        rootMargin: "50px", //cancel animation when distance is 50px away from the viewport
+        threshold: [0, 1], // when the element is at 0% start hidding it, when the element is at 100% start showing it
+        rootMargin: "-50px", //shrink the view box by 50px
       }
     );
 
@@ -71,11 +83,12 @@ const Header1 = styled.h1`
   color: black;
   text-shadow: 0 0 31px white;
   transition: transform 0.5s ease-in-out, opacity 0.75s ease-in-out;
-  transform: translateY(150%);
+  transform: translateY(100%);
   opacity: 0;
+  animation: slideUp 0.5s ease-in-out; // animation on page load
 
   &.slideUp-animate {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
 `;
