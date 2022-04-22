@@ -5,19 +5,19 @@ const Section = ({ title, description, image, leftButton = "Custom Order", right
   return (
     <Wrappper bgImage={image}>
       <Header></Header>
-      <Fade ssrFadeout bottom>
-        <ItemText>
-          <Header1>{title}</Header1>
-          {description && <Normal>{description}</Normal>}
-        </ItemText>
-      </Fade>
+      {/* <Fade ssrFadeout bottom> */}
+      <ItemText>
+        <Header1>{title}</Header1>
+        {description && <Normal>{description}</Normal>}
+      </ItemText>
+      {/* </Fade> */}
       <Buttons>
-        <Fade ssrFadeout bottom>
-          <ButtonGroup>
-            <LeftButton>{leftButton}</LeftButton>
-            {rightButton && <RightButton>{rightButton}</RightButton>}
-          </ButtonGroup>
-        </Fade>
+        {/* <Fade ssrFadeout bottom> */}
+        <ButtonGroup>
+          <LeftButton>{leftButton}</LeftButton>
+          {rightButton && <RightButton>{rightButton}</RightButton>}
+        </ButtonGroup>
+        {/* </Fade> */}
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
     </Wrappper>
