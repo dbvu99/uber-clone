@@ -1,21 +1,41 @@
+import { useEffect } from "react";
 import { Fade } from "react-reveal";
 import styled from "styled-components";
-const Section = ({ title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
+const Section = ({ id, title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
+  const elementId = "header-" + id;
+  useEffect(() => {
+    const header1 = document.getElementById(elementId);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            header1.classList.add("slideUp-animate");
+          } else {
+            header1.classList.remove("slideUp-animate");
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(header1);
+  }, []);
+
   return (
     <Wrappper bgImage={image}>
-      <Fade ssrFadeout bottom>
-        <ItemText>
-          <Header1>{title}</Header1>
-          {description && <Normal>{description}</Normal>}
-        </ItemText>
-      </Fade>
+      {/* <Fade ssrFadeout bottom> */}
+      <ItemText>
+        <Header1 id={elementId}>{title}</Header1>
+        {description && <Normal>{description}</Normal>}
+      </ItemText>
+      {/* </Fade> */}
       <Buttons>
-        <Fade ssrFadeout bottom>
-          <ButtonGroup>
-            <LeftButton>{leftButton}</LeftButton>
-            {rightButton && <RightButton>{rightButton}</RightButton>}
-          </ButtonGroup>
-        </Fade>
+        {/* <Fade ssrFadeout bottom> */}
+        <ButtonGroup>
+          <LeftButton>{leftButton}</LeftButton>
+          {rightButton && <RightButton>{rightButton}</RightButton>}
+        </ButtonGroup>
+        {/* </Fade> */}
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
     </Wrappper>
@@ -47,6 +67,14 @@ const Header1 = styled.h1`
   font-size: 2rem;
   color: black;
   text-shadow: 0 0 31px white;
+  transition: transform 0.5s ease-in-out, opacity 0.75s ease-in-out;
+  transform: translateY(150%);
+  opacity: 0;
+
+  &.slideUp-animate {
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 
 const Normal = styled.p`
