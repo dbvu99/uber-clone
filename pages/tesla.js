@@ -14,5 +14,4 @@ export default function Tesla() {
 
 const Container = styled.div`
   height: 100vh;
-  background: red;
 `;

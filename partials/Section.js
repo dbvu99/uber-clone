@@ -1,18 +1,23 @@
+import { Fade } from "react-reveal";
 import styled from "styled-components";
 import Header from "./tesla/Header";
 const Section = ({ title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   return (
     <Wrappper bgImage={image}>
       <Header></Header>
-      <ItemText>
-        <Header1>{title}</Header1>
-        {description && <Normal>{description}</Normal>}
-      </ItemText>
+      <Fade bottom>
+        <ItemText>
+          <Header1>{title}</Header1>
+          {description && <Normal>{description}</Normal>}
+        </ItemText>
+      </Fade>
       <Buttons>
-        <ButtonGroup>
-          <LeftButton>{leftButton}</LeftButton>
-          {rightButton && <RightButton>{rightButton}</RightButton>}
-        </ButtonGroup>
+        <Fade bottom>
+          <ButtonGroup>
+            <LeftButton>{leftButton}</LeftButton>
+            {rightButton && <RightButton>{rightButton}</RightButton>}
+          </ButtonGroup>
+        </Fade>
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
     </Wrappper>
@@ -22,7 +27,6 @@ const Section = ({ title, description, image, leftButton = "Custom Order", right
 export default Section;
 
 const Wrappper = styled.div`
-  background: blue;
   height: 100vh;
   width: 100%;
   background-image: ${({ bgImage }) => `url(/tesla/images/${bgImage})`};
