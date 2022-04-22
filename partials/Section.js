@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { Fade } from "react-reveal";
 import styled from "styled-components";
 const Section = ({ id, title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   const elementId = "header-" + id;
+  const pId = "p-" + id;
   // console.log(id);
 
   useEffect(() => {
     const header1 = document.getElementById(elementId);
-    // const header1 = document.getElementById(elementId);
+    const p1 = document.getElementById(elementId);
     // const header1 = document.getElementById(elementId);
     const observer = new IntersectionObserver(
       (entries) => {
@@ -21,9 +21,11 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
           console.log(id, entry.intersectionRatio);
           if (entry.intersectionRatio === 1) {
             header1.classList.add("slideUp-animate");
+            p1.classList.add("slideUp-animate");
           }
           if (entry.intersectionRatio === 0) {
             header1.classList.remove("slideUp-animate");
+            p1.classList.remove("slideUp-animate");
           }
         });
       },
@@ -38,19 +40,15 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
 
   return (
     <Wrappper bgImage={image}>
-      {/* <Fade ssrFadeout bottom> */}
       <ItemText>
         <Header1 id={elementId}>{title}</Header1>
-        {description && <Normal>{description}</Normal>}
+        {description && <Normal id={pId}>{description}</Normal>}
       </ItemText>
-      {/* </Fade> */}
       <Buttons>
-        {/* <Fade ssrFadeout bottom> */}
         <ButtonGroup>
           <LeftButton>{leftButton}</LeftButton>
           {rightButton && <RightButton>{rightButton}</RightButton>}
         </ButtonGroup>
-        {/* </Fade> */}
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
     </Wrappper>
