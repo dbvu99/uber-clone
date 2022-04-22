@@ -1,56 +1,30 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-const Section = ({ id, title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
+import applyRevealEffect from "../utils/applyRevealEffect";
+const Section = ({ id, title, description = "", image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   const elementId = "header-" + id;
-  const textId = "textItem-" + id;
   const pId = "p-" + id;
+  const leftBtn = "left-btn-" + id;
+  const rightBtn = "right-btn-" + id;
   // console.log(id);
 
   useEffect(() => {
-    const header1 = document.getElementById(elementId);
-    const p1 = document.getElementById(pId);
-    const observingTextItem = document.getElementById(textId);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // this is not an ideal solution for sliding up and down because it causes element to enter view port, but it's good to know
-          // if (entry.isIntersecting) {
-          //   header1.classList.add("slideUp-animate");
-          // } else {
-          //   header1.classList.remove("slideUp-animate");
-          // }
-          console.log(id, entry.intersectionRatio);
-          if (entry.intersectionRatio === 1) {
-            header1.classList.add("slideUp-animate");
-            // observingTextItem.classList.add("slideUp-animate");
-          }
-          if (entry.intersectionRatio === 0) {
-            header1.classList.remove("slideUp-animate");
-            // observingTextItem.classList.remove("slideUp-animate");
-          }
-        });
-      },
-      {
-        threshold: [0, 1], // when the element is at 0% start hidding it, when the element is at 100% start showing it
-        rootMargin: "-50px", //shrink the view box by 50px
-      }
-    );
-    // don't forget to add the observer to the element
-    observer.observe(header1);
-    // observer.observe(observingTextItem);
+    applyRevealEffect(elementId);
+    applyRevealEffect(pId);
+    applyRevealEffect(leftBtn, { threshold: [0, 1], marginRoot: "0px" });
+    applyRevealEffect(rightBtn, { threshold: [0, 1], marginRoot: "0px" });
   }, []);
 
   return (
     <Wrappper bgImage={image}>
       <ItemText>
         <Header1 id={elementId}>{title}</Header1>
-        {description && <Normal id={pId}>{description}</Normal>}
+        <Normal id={pId}>{description}</Normal>
       </ItemText>
       <Buttons>
         <ButtonGroup>
-          <LeftButton>{leftButton}</LeftButton>
-          {rightButton && <RightButton>{rightButton}</RightButton>}
+          <LeftButton id={leftBtn}>{leftButton}</LeftButton>
+          {rightButton && <RightButton id={rightBtn}>{rightButton}</RightButton>}
         </ButtonGroup>
         <DownArrow src="/tesla/images/down-arrow.svg"></DownArrow>
       </Buttons>
@@ -59,6 +33,16 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
 };
 
 export default Section;
+
+const RevealAnimation = styled.div`
+  &.slideUp-animate {
+    animation: slideUp 0.75s ease-in-out forwards;
+  }
+
+  &:not(.slideUp-animate) {
+    animation: slideDown 0.75s ease-in-out forwards;
+  }
+`;
 
 const Wrappper = styled.div`
   height: 100vh;
@@ -95,6 +79,14 @@ const Header1 = styled.h1`
 
 const Normal = styled.p`
   text-shadow: 0 0 31px white;
+
+  &.slideUp-animate {
+    animation: slideUp 0.75s ease-in-out forwards;
+  }
+
+  &:not(.slideUp-animate) {
+    animation: slideDown 0.75s ease-in-out forwards;
+  }
 `;
 
 const LeftButton = styled.div`
@@ -110,6 +102,14 @@ const LeftButton = styled.div`
   text-transform: uppercase;
   margin: 8px;
   font-size: 14px;
+
+  &.slideUp-animate {
+    animation: slideUp 0.75s ease-in-out forwards;
+  }
+
+  &:not(.slideUp-animate) {
+    animation: slideDown 0.75s ease-in-out forwards;
+  }
 `;
 
 const RightButton = styled(LeftButton)`
