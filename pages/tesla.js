@@ -14,4 +14,8 @@ export default function Tesla() {
 
 const Container = styled.div`
   height: 100vh;
+  background-image: url("/tesla/images/model-s-blur.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
