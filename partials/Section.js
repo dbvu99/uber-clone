@@ -5,14 +5,14 @@ const Section = ({ title, description, image, leftButton = "Custom Order", right
   return (
     <Wrappper bgImage={image}>
       <Header></Header>
-      <Fade bottom>
+      <Fade ssrFadeout bottom>
         <ItemText>
           <Header1>{title}</Header1>
           {description && <Normal>{description}</Normal>}
         </ItemText>
       </Fade>
       <Buttons>
-        <Fade bottom>
+        <Fade ssrFadeout bottom>
           <ButtonGroup>
             <LeftButton>{leftButton}</LeftButton>
             {rightButton && <RightButton>{rightButton}</RightButton>}
