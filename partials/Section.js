@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import styled from "styled-components";
 const Section = ({ id, title, description, image, leftButton = "Custom Order", rightButton = "Existing Inventory" }) => {
   const elementId = "header-" + id;
+  const textId = "textItem-" + id;
   const pId = "p-" + id;
   // console.log(id);
 
   useEffect(() => {
     const header1 = document.getElementById(elementId);
-    const p1 = document.getElementById(elementId);
-    // const header1 = document.getElementById(elementId);
+    const p1 = document.getElementById(pId);
+    const observingTextItem = document.getElementById(textId);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -21,11 +23,11 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
           console.log(id, entry.intersectionRatio);
           if (entry.intersectionRatio === 1) {
             header1.classList.add("slideUp-animate");
-            p1.classList.add("slideUp-animate");
+            // observingTextItem.classList.add("slideUp-animate");
           }
           if (entry.intersectionRatio === 0) {
             header1.classList.remove("slideUp-animate");
-            p1.classList.remove("slideUp-animate");
+            // observingTextItem.classList.remove("slideUp-animate");
           }
         });
       },
@@ -34,8 +36,9 @@ const Section = ({ id, title, description, image, leftButton = "Custom Order", r
         rootMargin: "-50px", //shrink the view box by 50px
       }
     );
-
+    // don't forget to add the observer to the element
     observer.observe(header1);
+    // observer.observe(observingTextItem);
   }, []);
 
   return (
@@ -80,14 +83,13 @@ const Header1 = styled.h1`
   font-size: 2rem;
   color: black;
   text-shadow: 0 0 31px white;
-  transition: transform 0.5s ease-in-out, opacity 0.75s ease-in-out;
-  transform: translateY(100%);
-  opacity: 0;
-  animation: slideUp 0.5s ease-in-out; // animation on page load
 
   &.slideUp-animate {
-    transform: translateX(0);
-    opacity: 1;
+    animation: slideUp 0.75s ease-in-out forwards;
+  }
+
+  &:not(.slideUp-animate) {
+    animation: slideDown 0.75s ease-in-out forwards;
   }
 `;
 
