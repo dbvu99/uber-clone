@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import "../styles/tesla.css";
+import "../styles/teslaStyle.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 function MyApp({ Component, pageProps }) {
